@@ -1,33 +1,34 @@
-package feing.feingdemo;
+package com.bootcamp.spring.api;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import feing.feingdemo.client.UserClient;
-import feing.feingdemo.dto.UserResponse;
+import com.bootcamp.spring.api.client.LocationClient;
+import com.bootcamp.spring.api.dto.ServiceReponse;
 
 @SpringBootApplication
 @RestController
 @EnableFeignClients
-public class FeingdemoApplication {
+public class SpringcloudApplication {
+	
 	@Autowired
-	private UserClient client;
+	private LocationClient client;
 	
+	@GetMapping("/findAllLocation")
 	
-	@GetMapping("/findAllUser")
-	public List<UserResponse> getAllUser(){
-		return client.getUsers();
+	public List<ServiceReponse> getAllLocation(){
 		
+		return client.getLocation();
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(FeingdemoApplication.class, args);
+		SpringApplication.run(SpringcloudApplication.class, args);
 	}
 
 }
